@@ -16,7 +16,8 @@ pipeline{
                 
                 script{
                     
-                    git branch: 'main', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    //git branch: 'main', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    gitCheckout(branch: 'main', url:'https://github.com/manvigoyal20/demoapp.git')
                 }
             }
         }
