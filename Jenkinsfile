@@ -7,7 +7,7 @@ pipeline{
     tools{
         maven 'maven3'
     }
-    echo "User selected branch is ${params.branchName}"
+    echo "User selected branch is ${params.branchName.split('/').last()}"
     
     stages {
         
@@ -17,8 +17,8 @@ pipeline{
                 
                 script{
                     
-                    //git branch: 'main', url: 'https://github.com/manvigoyal20/demoapp.git'
-                    gitCheckout(branch: 'main', url:'https://github.com/manvigoyal20/demoapp.git')
+                    //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    gitCheckout(branch: 'new1', url:'https://github.com/manvigoyal20/demoapp.git')
                 }
             }
         }
