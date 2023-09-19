@@ -1,4 +1,4 @@
-@Library('mytest-sl') _
+@Library("mytest-sl@${params.branchName.split('/').last()}") _
 
 pipeline{
     
