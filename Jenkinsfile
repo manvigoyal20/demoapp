@@ -7,6 +7,7 @@ pipeline{
     tools{
         maven 'maven3'
     }
+    echo "User selected branch is ${params.branchName}"
     
     stages {
         
@@ -66,7 +67,7 @@ pipeline{
             steps{
                 script{
 
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar_api'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
                     
                 }
             }
