@@ -13,8 +13,9 @@ pipeline{
             steps{
                 
                 script{
+                    echo "User selected branch is ${params.branchName.split('/').last()}"
                     
-                    git branch: 'main', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    git branch: "${params.branchName.split('/').last()}", url: 'https://github.com/manvigoyal20/demoapp.git'
                 }
             }
         }
