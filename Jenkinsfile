@@ -1,3 +1,5 @@
+@Library('mytest-sl') _
+
 pipeline{
     
     agent any 
@@ -13,7 +15,11 @@ pipeline{
             steps{
                 
                 script{
-                    
+                    //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    echo "User selected branch is ${params.branchName.split('/').last()}"
+   
+                    gitCheckout(branch: "${params.branchName.split('/').last()}", url:"https://github.com/manvigoyal20/demoapp.git")
+
                 }
             }
         }
@@ -23,7 +29,8 @@ pipeline{
                 
                 script{
                     
-                    sh "mvn test"
+                    //sh "mvn test"
+                    mvnTest()
                 }
             }
         }
@@ -33,17 +40,40 @@ pipeline{
                 
                 script{
                     
-                    sh "mvn verify -DskipUnitTests"
+                    //sh "mvn verify -DskipUnitTests"
+                    intTest()
                 }
             }
         }
         stage('Maven Build'){
             steps{
                 script{
-                    sh "mvn clean install"
+                    //sh "mvn clean install"
+                    mvnBuild()
                 }
             }
         }
+        stage('Static Code Analysis'){
+            steps{
+                script{
+                    //withSonarQubeEnv(credentialsId: 'sonar_api'){
+                    //    sh 'mvn clean package sonar:sonar'
+                    //}
+                    def SonarCredentialsId= 'sonar_api'
+                    SonarQube(SonarCredentialsId)
+                }
+            }
+        }
+        stage('Quality Gate Analysis'){
+            steps{
+                script{
+
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+                    
+                }
+            }
+        }
+
         
     }
         
