@@ -18,7 +18,7 @@ pipeline{
                 script{
                     
                     //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
-                    //gitCheckout(branch: 'new1', url:'https://github.com/manvigoyal20/demoapp.git')
+                    gitCheckout(branch: '${params.branchName.split('/').last()}', url:'https://github.com/manvigoyal20/demoapp.git')
                 }
             }
         }
