@@ -18,7 +18,6 @@ pipeline{
         
         stage('Git Checkout.develop'){
 
-            if(params.testParam == 'true'){
 
                 //when{expression{ params.branch == 'develop'}}
             
@@ -26,10 +25,13 @@ pipeline{
                 
                     script{
 
+                        if(params.testParam == 'true'){
                         //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
 
                         gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
+                        }
                     }
+
                 }
             }
         }
