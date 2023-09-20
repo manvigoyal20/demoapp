@@ -22,10 +22,11 @@ pipeline{
             steps{
                 
                 script{
-                    
                     //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
+
                     
                     gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
+
                 }
             }
         }
