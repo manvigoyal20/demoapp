@@ -18,9 +18,9 @@ pipeline{
         
         stage('Git Checkout.develop'){
 
-            if(params.testParam == 'true'){
+            if(params.testParam == 'true' && params.branch == 'develop'){
 
-                when{expression{ params.branch == 'develop'}}
+                //when{expression{ params.branch == 'develop'}}
             
                 steps{
                 
