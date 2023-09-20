@@ -19,34 +19,32 @@ pipeline{
         stage('Git Checkout.develop'){
 
 
-                //when{expression{ params.branch == 'develop'}}
+                when{expression{ params.testParam == 'false'}}
             
                 steps{
                 
                     script{
 
-                        if(params.testParam == 'true'){
+                        //if(params.testParam == 'true'){
                         //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
 
                         gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
-                        }
+                        //}
                     }
 
                 }
         }
         stage('UNIT TESTING.develop'){
 
-            //when{expression{ params.branch == 'develop'}}
+            when{expression{ params.testParam == 'true'}}
             
             steps{
                 
                 script{
-
-                    if(params.testParam == 'true'){
                     
                     //sh "mvn test"
                     mvnTest()
-                    }
+                
                 }
             }
         }
