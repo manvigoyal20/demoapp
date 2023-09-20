@@ -41,9 +41,12 @@ pipeline{
             steps{
                 
                 script{
+
+                    if(params.testParam == 'true'){
                     
                     //sh "mvn test"
                     mvnTest()
+                    }
                 }
             }
         }
