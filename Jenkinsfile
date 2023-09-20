@@ -4,6 +4,11 @@ pipeline{
     
     agent any 
 
+    parameters{
+
+        choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
+    }
+
     tools{
         maven 'maven3'
     }
@@ -11,19 +16,23 @@ pipeline{
     stages {
         
         stage('Git Checkout'){
+
+            when{expression{ params.branch == 'develop'}}
             
             steps{
                 
                 script{
                     //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
-                    echo "User selected branch is ${params.branchName.split('/').last()}"
-   
-                    gitCheckout(branch: "${params.branchName.split('/').last()}", url:"https://github.com/manvigoyal20/demoapp.git")
+
+                    
+                    gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
 
                 }
             }
         }
         stage('UNIT TESTING'){
+
+            when{expression{ params.branch == 'develop'}}
             
             steps{
                 
@@ -35,6 +44,8 @@ pipeline{
             }
         }
         stage('INTEGRATION TESTING'){
+
+            when{expression{ params.branch == 'develop'}}
             
             steps{
                 
@@ -46,6 +57,9 @@ pipeline{
             }
         }
         stage('Maven Build'){
+
+            when{expression{ params.branch == 'develop'}}
+
             steps{
                 script{
                     //sh "mvn clean install"
@@ -54,6 +68,9 @@ pipeline{
             }
         }
         //stage('Static Code Analysis'){
+
+            //when{expression{ params.branch == 'develop'}}
+
         //    steps{
         //        script{
         //            //withSonarQubeEnv(credentialsId: 'sonar_api'){
@@ -65,6 +82,9 @@ pipeline{
         //    }
         //}
          //stage('Quality Gate Analysis'){
+
+            //when{expression{ params.branch == 'develop'}}
+
            // steps{
            //     script{
            //
