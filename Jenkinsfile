@@ -7,6 +7,7 @@ pipeline{
     parameters{
 
         choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
+        booleanParam(name: 'testParam', description:'select true or false')
     }
 
     tools{
@@ -15,21 +16,24 @@ pipeline{
     
     stages {
         
-        stage('Git Checkout'){
+        stage('Git Checkout.develop'){
 
-            when{expression{ params.branch == 'develop'}}
+            if(params.testParam == 'true'){
+
+                when{expression{ params.branch == 'develop'}}
             
-            steps{
+                steps{
                 
-                script{
-                    
-                    //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
-                    
-                    gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
+                    script{
+
+                        //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
+
+                        gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
+                    }
                 }
             }
         }
-        stage('UNIT TESTING'){
+        stage('UNIT TESTING.develop'){
 
             when{expression{ params.branch == 'develop'}}
             
@@ -42,7 +46,7 @@ pipeline{
                 }
             }
         }
-        stage('INTEGRATION TESTING'){
+        stage('INTEGRATION TESTING.develop'){
 
             when{expression{ params.branch == 'develop'}}
             
@@ -55,7 +59,7 @@ pipeline{
                 }
             }
         }
-        stage('Maven Build'){
+        stage('Maven Build.develop'){
 
             when{expression{ params.branch == 'develop'}}
 
@@ -66,32 +70,32 @@ pipeline{
                 }
             }
         }
-        //stage('Static Code Analysis'){
+        stage('Static Code Analysis.develop'){
 
-            //when{expression{ params.branch == 'develop'}}
+            when{expression{ params.branch == 'main'}}
 
-        //    steps{
-        //        script{
-        //            //withSonarQubeEnv(credentialsId: 'sonar_api'){
-        //            //    sh 'mvn clean package sonar:sonar'
-        //            //}
-        //            def SonarCredentialsId= 'sonar_api'
-        //            SonarQube(SonarCredentialsId)
-        //        }
-        //    }
-        //}
-         //stage('Quality Gate Analysis'){
+            steps{
+                script{
+                    //withSonarQubeEnv(credentialsId: 'sonar_api'){
+                    //    sh 'mvn clean package sonar:sonar'
+                    //}
+                    def SonarCredentialsId= 'sonar_api'
+                    SonarQube(SonarCredentialsId)
+                }
+            }
+        }
+        stage('Quality Gate Analysis.develop'){
 
-            //when{expression{ params.branch == 'develop'}}
+            when{expression{ params.branch == 'main'}}
 
-           // steps{
-           //     script{
-           //
-           //         waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
-           //         
-           //     }
-           // }
-        //}
+            steps{
+                script{
+           
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+                    
+                }
+            }
+        }
 
         
     }
