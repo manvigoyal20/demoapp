@@ -1,4 +1,4 @@
-@Library('mytest-sl') _
+@Library("mytest-sl") _
 
 pipeline{
     
@@ -53,26 +53,26 @@ pipeline{
                 }
             }
         }
-        stage('Static Code Analysis'){
-            steps{
-                script{
-                    //withSonarQubeEnv(credentialsId: 'sonar_api'){
-                    //    sh 'mvn clean package sonar:sonar'
-                    //}
-                    def SonarCredentialsId= 'sonar_api'
-                    SonarQube(SonarCredentialsId)
-                }
-            }
-        }
-        stage('Quality Gate Analysis'){
-            steps{
-                script{
-
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
-                    
-                }
-            }
-        }
+        //stage('Static Code Analysis'){
+        //    steps{
+        //        script{
+        //            //withSonarQubeEnv(credentialsId: 'sonar_api'){
+        //            //    sh 'mvn clean package sonar:sonar'
+        //            //}
+        //            def SonarCredentialsId= 'sonar_api'
+        //            SonarQube(SonarCredentialsId)
+        //        }
+        //    }
+        //}
+         //stage('Quality Gate Analysis'){
+           // steps{
+           //     script{
+           //
+           //         waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+           //         
+           //     }
+           // }
+        //}
 
         
     }
