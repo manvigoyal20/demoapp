@@ -67,32 +67,32 @@ pipeline{
                 }
             }
         }
-        //stage('Static Code Analysis'){
+        stage('Static Code Analysis'){
 
-            //when{expression{ params.branch == 'develop'}}
+            when{expression{ params.branch == 'develop'}}
 
-        //    steps{
-        //        script{
-        //            //withSonarQubeEnv(credentialsId: 'sonar_api'){
-        //            //    sh 'mvn clean package sonar:sonar'
-        //            //}
-        //            def SonarCredentialsId= 'sonar_api'
-        //            SonarQube(SonarCredentialsId)
-        //        }
-        //    }
-        //}
-         //stage('Quality Gate Analysis'){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonar_api'){
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                    def SonarCredentialsId= 'sonar_api'
+                    SonarQube(SonarCredentialsId)
+                }
+            }
+        }
+        stage('Quality Gate Analysis'){
 
-            //when{expression{ params.branch == 'develop'}}
+            when{expression{ params.branch == 'develop'}}
 
-           // steps{
-           //     script{
-           //
-           //         waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
-           //         
-           //     }
-           // }
-        //}
+            steps{
+                script{
+           
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+                    
+                }
+            }
+        }
 
         
     }
