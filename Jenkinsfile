@@ -1,4 +1,4 @@
-@Library("mytest-sl@${params.branchName}") _
+@Library("mytest-sl") _
 
 pipeline{
     
