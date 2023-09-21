@@ -1,5 +1,5 @@
 @Library('mytest-sl') _
-customParameters()
+params.branch = customParameters()
 
 pipeline {
     agent any
