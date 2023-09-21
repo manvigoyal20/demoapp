@@ -1,5 +1,5 @@
 @Library('mytest-sl') _
-def a = customParameters()
+def params = customParameters()
 
 pipeline {
     agent any
@@ -14,26 +14,26 @@ pipeline {
 
     stages {
         stage('UNIT TESTING.develop') {
-            steps {
-            script{
-                echo "WARNING: ${a}"
-            }
-            }
-            // when {
-            //     allOf {
-            //         // expression { params.testParam }
-            //         expression { params.branch == 'develop' }
-            //     }
-            // }
-
             // steps {
-            //     script {
-            //         //sh "mvn test"
-            //         parameters()
-            //         mvnTest()
-            //     //library 'mytest-sl'
-            //     }
+            // script{
+            //     echo "WARNING: ${a}"
             // }
+            // }
+            when {
+                allOf {
+                    // expression { params.testParam }
+                    expression { params.branch == 'develop' }
+                }
+            }
+
+            steps {
+                script {
+                    echo "WARNING: ${params.branch}"
+                    //sh "mvn test"
+                    mvnTest()
+                //library 'mytest-sl'
+                }
+            }
         }
         // stage('INTEGRATION TESTING.develop') {
         //     when { expression { params.branch == 'develop' } }
