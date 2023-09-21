@@ -33,8 +33,9 @@ pipeline{
                 script{
                     
                     //sh "mvn test"
+                    parameters()
                     mvnTest()
-                    library 'mytest-sl'
+                    //library 'mytest-sl'
                 
                 }
             }
