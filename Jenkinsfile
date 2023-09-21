@@ -1,5 +1,5 @@
 @Library('mytest-sl') _
-params.branch = customParameters()
+def a = customParameters()
 
 pipeline {
     agent any
@@ -14,6 +14,9 @@ pipeline {
 
     stages {
         stage('UNIT TESTING.develop') {
+            script{
+                echo "WARNING: ${a}"
+            }
             when {
                 allOf {
                     // expression { params.testParam }
