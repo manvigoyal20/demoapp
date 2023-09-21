@@ -34,7 +34,7 @@ pipeline{
         }
         stage('UNIT TESTING.develop'){
 
-            when{expression{ params.testParam == 'true'}}
+            when{expression{ params.testParam }}
             
             steps{
                 
