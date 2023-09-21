@@ -19,21 +19,21 @@ pipeline {
                 echo "WARNING: ${a}"
             }
             }
-            when {
-                allOf {
-                    // expression { params.testParam }
-                    expression { params.branch == 'develop' }
-                }
-            }
+            // when {
+            //     allOf {
+            //         // expression { params.testParam }
+            //         expression { params.branch == 'develop' }
+            //     }
+            // }
 
-            steps {
-                script {
-                    //sh "mvn test"
-                    parameters()
-                    mvnTest()
-                //library 'mytest-sl'
-                }
-            }
+            // steps {
+            //     script {
+            //         //sh "mvn test"
+            //         parameters()
+            //         mvnTest()
+            //     //library 'mytest-sl'
+            //     }
+            // }
         }
         stage('INTEGRATION TESTING.develop') {
             when { expression { params.branch == 'develop' } }
