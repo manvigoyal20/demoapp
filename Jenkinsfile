@@ -25,7 +25,12 @@ pipeline {
             }
         }
         stage('INTEGRATION TESTING.develop') {
-            when { expression { params.testParam } }
+            when {
+                allOf {
+                    expression { params.testParam }
+                    expression { params.branch == 'main' }
+                }
+            }
 
             steps {
                 script {
@@ -35,7 +40,12 @@ pipeline {
             }
         }
         stage('Maven Build.develop') {
-            when { expression { params.testParam } }
+            when {
+                allOf {
+                    expression { params.testParam }
+                    expression { params.branch == 'main' }
+                }
+            }
 
             steps {
                 script {
