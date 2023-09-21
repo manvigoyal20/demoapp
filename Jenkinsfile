@@ -7,7 +7,7 @@ pipeline{
     parameters{
 
         choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
-        booleanParam(name: 'testParam', description:'select true or false')
+        booleanParam(name: 'testParam', defaultValue: 'true' description:'select true or false')
     }
 
     tools{
@@ -19,20 +19,18 @@ pipeline{
         stage('Git Checkout.develop'){
 
 
-                when{expression{ params.testParam == 'false'}}
+            when{expression{ params.testParam }}
             
-                steps{
-                
-                    script{
-
-                        //if(params.testParam == 'true'){
-                        //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
-
-                        gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
-                        //}
-                    }
-
+            steps{
+            
+                script{
+                    //if(params.testParam == 'true'){
+                    //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
+                    gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
+                    //}
                 }
+
+            }
         }
         stage('UNIT TESTING.develop'){
 
