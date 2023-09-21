@@ -18,8 +18,6 @@ pipeline{
         
         stage('UNIT TESTING.develop'){
 
-            parameters(
-
 
             when{
                 allOf{
@@ -28,7 +26,6 @@ pipeline{
          
                 }
             }
-            )
 
             
             steps{
