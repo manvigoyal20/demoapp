@@ -16,7 +16,7 @@ pipeline {
         stage('UNIT TESTING.develop') {
             when {
                 allOf {
-                    expression { params.testParam }
+                    // expression { params.testParam }
                     expression { params.branch == 'develop' }
                 }
             }
