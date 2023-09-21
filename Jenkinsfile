@@ -16,25 +16,15 @@ pipeline{
     
     stages {
         
-        stage('Git Checkout.develop'){
-
-
-            when{expression{ params.testParam }}
-            
-            steps{
-            
-                script{
-                    //if(params.testParam == 'true'){
-                    //git branch: 'new1', url: 'https://github.com/manvigoyal20/demoapp.git'
-                    gitCheckout(branch: "${params.branch}", url:"https://github.com/manvigoyal20/demoapp.git")
-                    //}
-                }
-
-            }
-        }
         stage('UNIT TESTING.develop'){
 
-            when{expression{ params.testParam }}
+            when{
+                allOf{
+                    expression{ params.testParam }
+                    expression{ params.branch=='develop'}
+                }
+            }
+
             
             steps{
                 
