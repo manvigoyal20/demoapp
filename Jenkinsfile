@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('INTEGRATION TESTING.develop') {
-            when { expression { params.branch == 'develop' } }
+            when { expression { params.testParam } }
 
             steps {
                 script {
