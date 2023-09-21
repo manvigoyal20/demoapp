@@ -14,8 +14,10 @@ pipeline {
 
     stages {
         stage('UNIT TESTING.develop') {
+            steps {
             script{
                 echo "WARNING: ${a}"
+            }
             }
             when {
                 allOf {
