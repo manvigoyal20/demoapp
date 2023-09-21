@@ -1,12 +1,12 @@
 @Library('mytest-sl') _
-customParameters()
+// customParameters()
 
 pipeline {
     agent any
-    // parameters {
-    //     choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
-    //     booleanParam(name: 'testParam', defaultValue: 'true', description:'select true or false')
-    // }
+    parameters {
+        choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
+        booleanParam(name: 'testParam', defaultValue: 'true', description:'select true or false')
+    }
 
     tools {
         maven 'maven3'
