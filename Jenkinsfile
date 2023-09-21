@@ -18,10 +18,12 @@ pipeline{
         
         stage('UNIT TESTING.develop'){
 
+
             when{
                 allOf{
                     expression{ params.testParam }
                     expression{ params.branch=='develop'}
+         
                 }
             }
 
@@ -60,6 +62,7 @@ pipeline{
                 }
             }
         }
+
         stage('Static Code Analysis.develop'){
 
             when{expression{ params.branch == 'main'}}
@@ -67,13 +70,16 @@ pipeline{
             steps{
                 script{
                     //withSonarQubeEnv(credentialsId: 'sonar_api'){
+
                     //    sh 'mvn clean package sonar:sonar'
+                   
                     //}
                     def SonarCredentialsId= 'sonar_api'
                     SonarQube(SonarCredentialsId)
                 }
             }
         }
+
         stage('Quality Gate Analysis.develop'){
 
             when{expression{ params.branch == 'main'}}
