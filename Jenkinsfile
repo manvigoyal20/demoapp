@@ -35,7 +35,7 @@ pipeline {
             }
         }
         stage('Maven Build.develop') {
-            when { expression { params.branch == 'develop' } }
+            when { expression { params.testParam } }
 
             steps {
                 script {
