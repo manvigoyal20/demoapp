@@ -33,8 +33,8 @@ pipeline{
                 script{
                     
                     //sh "mvn test"
-                    library 'mytest-sl'
                     mvnTest()
+                    library 'mytest-sl'
                 
                 }
             }
