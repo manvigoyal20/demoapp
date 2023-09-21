@@ -4,11 +4,11 @@ pipeline{
     
     agent any 
 
-    //parameters{
+    parameters{
 
-        //choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
-        //booleanParam(name: 'testParam', defaultValue: 'true', description:'select true or false')
-    //}
+        choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
+        booleanParam(name: 'testParam', defaultValue: 'true', description:'select true or false')
+    }
 
     tools{
         maven 'maven3'
@@ -33,6 +33,7 @@ pipeline{
                 script{
                     
                     //sh "mvn test"
+                    library 'test-sl'
                     mvnTest()
                 
                 }
