@@ -3,22 +3,13 @@ def params = customParameters()
 
 pipeline {
     agent any
-    // parameters {
-    //     choice(name:'branch', choices:'main\ndevelop', description:'choose any branch')
-    //     booleanParam(name: 'testParam', defaultValue: 'true', description:'select true or false')
-    // }
-
     tools {
         maven 'maven3'
     }
 
     stages {
         stage('UNIT TESTING.develop') {
-            // steps {
-            // script{
-            //     echo "WARNING: ${a}"
-            // }
-            // }
+    
             when {
                 allOf {
                     expression { params.testParam }
@@ -28,10 +19,8 @@ pipeline {
 
             steps {
                 script {
-                    echo "WARNING: ${params.branch}"
                     //sh "mvn test"
                     mvnTest()
-                //library 'mytest-sl'
                 }
             }
         }
