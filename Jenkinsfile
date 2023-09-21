@@ -21,7 +21,7 @@ pipeline {
             // }
             when {
                 allOf {
-                    // expression { params.testParam }
+                    expression { params.testParam }
                     expression { params.branch == 'develop' }
                 }
             }
@@ -35,51 +35,51 @@ pipeline {
                 }
             }
         }
-        // stage('INTEGRATION TESTING.develop') {
-        //     when { expression { params.branch == 'develop' } }
+        stage('INTEGRATION TESTING.develop') {
+            when { expression { params.branch == 'develop' } }
 
-        //     steps {
-        //         script {
-        //             //sh "mvn verify -DskipUnitTests"
-        //             intTest()
-        //         }
-        //     }
-        // }
-        // stage('Maven Build.develop') {
-        //     when { expression { params.branch == 'develop' } }
+            steps {
+                script {
+                    //sh "mvn verify -DskipUnitTests"
+                    intTest()
+                }
+            }
+        }
+        stage('Maven Build.develop') {
+            when { expression { params.branch == 'develop' } }
 
-        //     steps {
-        //         script {
-        //             //sh "mvn clean install"
-        //             mvnBuild()
-        //         }
-        //     }
-        // }
+            steps {
+                script {
+                    //sh "mvn clean install"
+                    mvnBuild()
+                }
+            }
+        }
 
-        // stage('Static Code Analysis.develop') {
-        //     when { expression { params.branch == 'main' } }
+        stage('Static Code Analysis.develop') {
+            when { expression { params.branch == 'main' } }
 
-        //     steps {
-        //         script {
-        //             //withSonarQubeEnv(credentialsId: 'sonar_api'){
+            steps {
+                script {
+                    //withSonarQubeEnv(credentialsId: 'sonar_api'){
 
-        //             //    sh 'mvn clean package sonar:sonar'
+                    //    sh 'mvn clean package sonar:sonar'
 
-        //             //}
-        //             def SonarCredentialsId = 'sonar_api'
-        //             SonarQube(SonarCredentialsId)
-        //         }
-        //     }
-        // }
+                    //}
+                    def SonarCredentialsId = 'sonar_api'
+                    SonarQube(SonarCredentialsId)
+                }
+            }
+        }
 
-        // stage('Quality Gate Analysis.develop') {
-        //     when { expression { params.branch == 'main' } }
+        stage('Quality Gate Analysis.develop') {
+            when { expression { params.branch == 'main' } }
 
-        //     steps {
-        //         script {
-        //             waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
-        //         }
-        //     }
-        // }
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+                }
+            }
+        }
     }
 }
