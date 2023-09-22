@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('UNIT TESTING.develop') {
+        stage('UNIT TESTING') {
     
             when {
                 allOf {
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage('INTEGRATION TESTING.develop') {
+        stage('INTEGRATION TESTING') {
             when {
                 allOf {
                     expression { params.testParam }
@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('Maven Build.develop') {
+        stage('Maven Build') {
             when {
                 allOf {
                     expression { params.testParam }
@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis.develop') {
+        stage('Static Code Analysis') {
             when { expression { params.branch == 'main' } }
 
             steps {
@@ -71,7 +71,7 @@ pipeline {
             }
         }
 
-        stage('Quality Gate Analysis.develop') {
+        stage('Quality Gate Analysis') {
             when { expression { params.branch == 'main' } }
 
             steps {
