@@ -60,12 +60,12 @@ pipeline {
 
             steps {
                 script {
-                    //withSonarQubeEnv(credentialsId: 'sonar_api'){
+                    //withSonarQubeEnv(credentialsId: 'sonar-api'){
 
                     //    sh 'mvn clean package sonar:sonar'
 
                     //}
-                    def SonarCredentialsId = 'sonar_api'
+                    def SonarCredentialsId = 'sonar-api'
                     SonarQube(SonarCredentialsId)
                 }
             }
@@ -76,7 +76,7 @@ pipeline {
 
             steps {
                 script {
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube_api'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar-api'
                 }
             }
         }
