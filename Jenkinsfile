@@ -43,7 +43,7 @@ pipeline {
             when {
                 allOf {
                     expression { params.testParam }
-                    expression { params.branch == 'main' }
+                    expression { params.branch == 'develop' }
                 }
             }
 
@@ -56,7 +56,7 @@ pipeline {
         }
 
         stage('Static Code Analysis') {
-            when { expression { params.branch == 'main' } }
+            when { expression { params.branch == 'develop' } }
 
             steps {
                 script {
@@ -72,11 +72,21 @@ pipeline {
         }
 
         stage('Quality Gate Analysis') {
-            when { expression { params.branch == 'main' } }
+            when { expression { params.branch == 'develop' } }
 
             steps {
                 script {
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonar_api'
+                }
+            }
+        }
+
+        stage('Docker Image Build') {
+            when { expression { params.branch == 'develop' } }
+
+            steps {
+                script {
+                    dockerBuild("${params.dockerhubUser}", "${params.imageName}", "${params.imageTag}")
                 }
             }
         }
