@@ -2,7 +2,7 @@
 def params = customParameters()
 
 pipeline {
-    agent { node { label 'dockerAgent' } }
+    agent any
 
     tools {
         maven 'maven3'
