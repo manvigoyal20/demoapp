@@ -6,10 +6,10 @@ pipeline {
     //agent{ node{ label'mySystem' }}
 
     tools {
-        maven 'maven3'
+    <...>
+    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
 
     }
-
     stages {
         stage('UNIT TESTING') {
     
