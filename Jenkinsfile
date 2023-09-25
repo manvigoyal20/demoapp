@@ -21,7 +21,6 @@ pipeline {
             steps {
                 script {
                     //sh "mvn test"
-                    sh "docker ps -a"
                     mvnTest()
                 }
             }
