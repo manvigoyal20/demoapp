@@ -23,6 +23,7 @@ pipeline {
                 script {
                     //sh "mvn test"
                     mvnTest()
+                    sh "docker ps -a"
                 }
             }
         }
