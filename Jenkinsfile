@@ -6,7 +6,7 @@ pipeline {
     //agent{ node{ label'mySystem' }}
 
     tools {
-        
+
         maven 'maven 3'
         'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
 
