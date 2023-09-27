@@ -1,4 +1,4 @@
-package com.javadevelopersguide.junit;
+package com.example.springboot.controller;
 
 public class Calculator {
     public int evaluate(String expression) {
@@ -7,6 +7,4 @@ public class Calculator {
             sum += Integer.valueOf(summand);
             return sum;
     } 
-    
 }
-
