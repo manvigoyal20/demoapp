@@ -98,14 +98,18 @@ pipeline {
 
         stage ('report'){
             steps{
-                ([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+                script{
+                    ([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+                }
             }
         }
 
 
         stage ('Artifact'){
             steps{
-                ([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+                script{
+                    ([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+                }
             }
         }
 
