@@ -3,7 +3,7 @@ def params = customParameters()
 
 pipeline {
     //agent any
-    agent{ node{ label'mySystem' }}
+    agent{ node{ label'myDocker' }}
 
     tools {
 
