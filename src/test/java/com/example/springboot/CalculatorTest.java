@@ -5,8 +5,9 @@ import org.junit.Test;
 public class CalculatorTest {
     @Test
     public void evaluatesExpression() {
-       Calculator calculator = new Calculator();
-       int sum = calculator.evaluate("1+2+3");
+       CalculatorTest calculator = new CalculatorTest();
+    //    int sum = calculator.evaluate("1+2+3");
+       int sum = calculator.evaluatesExpression
        assertEquals(6, sum);
     }
     
