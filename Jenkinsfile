@@ -33,7 +33,7 @@ pipeline {
             when {
                 allOf {
                     expression { params.testParam }
-                    expression { params.branch == 'main' }
+                    expression { params.branch == 'develop' }
                 }
             }
 
